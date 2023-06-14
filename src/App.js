@@ -8,9 +8,7 @@ const tokenId = '253';
 function App() {
   return (
     <div className="App">
-      <NFTDisplay contractAddress
-
-={contractAddress} tokenId={tokenId} />
+      <NFTDisplay contractAddress={contractAddress} tokenId={tokenId} />
       <NFTTable contractAddress={contractAddress} tokenId={tokenId} />
     </div>
   );
