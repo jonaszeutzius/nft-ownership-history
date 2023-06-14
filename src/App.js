@@ -1,23 +1,17 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import NFTDisplay from './NFTDisplay';
+import NFTTable from './NFTTable';
+
+const contractAddress = '0xffc558bc2fef0d4295d7ce95e379518eaa6789e3';
+const tokenId = '253';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <NFTDisplay contractAddress
+
+={contractAddress} tokenId={tokenId} />
+      <NFTTable contractAddress={contractAddress} tokenId={tokenId} />
     </div>
   );
 }
