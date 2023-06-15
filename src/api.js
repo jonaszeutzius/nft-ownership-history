@@ -2,10 +2,10 @@ import axios from 'axios';
 
 const API_KEY = '2jhzbqIWanB8puiqySBIWJVf6Ovp7oPW'; 
 
-export const getAllTransfers = async (contractAddress, tokenId) => {
+export const getAllTransfers = async (contractAddress, tokenId, blockchain) => {
   const options = {
     method: 'GET',
-    url: `http://localhost:8080/v1/transfers/contract/${contractAddress}/token/${tokenId}?chain=eth-main&page_size=25`,
+    url: `http://localhost:8080/v1/transfers/contract/${contractAddress}/token/${tokenId}?chain=${blockchain}&page_size=25`,
     headers: {
       accept: 'application/json',
       'X-API-KEY': API_KEY
@@ -20,10 +20,10 @@ export const getAllTransfers = async (contractAddress, tokenId) => {
   }
 };
 
-export const getSingleNFT = async (contractAddress, tokenId) => {
+export const getSingleNFT = async (contractAddress, tokenId, blockchain) => {
   const options = {
     method: 'GET',
-    url: `http://localhost:8080/v1/nfts/contract/${contractAddress}/token/${tokenId}?chain=eth-main`,
+    url: `http://localhost:8080/v1/nfts/contract/${contractAddress}/token/${tokenId}?chain=${blockchain}`,
     headers: {
       accept: 'application/json',
       'X-API-KEY': API_KEY
