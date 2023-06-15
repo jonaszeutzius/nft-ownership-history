@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { getSingleNFT } from './api';
 import { getAllTransfers } from './api';
 
@@ -6,14 +6,16 @@ const NFTDisplay = ({ nft }) => {
   if (nft === null) return null;
 
   return (
-    <div>
+    <div className="nftData">
       <h2>{nft.name}</h2>
-      <img src={nft.cached_images.original} alt={nft.name} style={{ width: '300px' }} />
+      <div className="imageContainer">
+        {console.log(nft)}
+        <img className="image" src={nft.cached_images.medium_500_500} alt={nft.name} />
+      </div>
       <p>{nft.description}</p>
     </div>
   );
 };
-
 const NFTTable = ({ transfers }) => {
   if (transfers === null) return null;
 
@@ -68,14 +70,20 @@ const Wrapper = () => {
 
   return (
     <div>
-      <h1>NFT Ownership History</h1>
+      <h1 className='title'>NFT Ownership History</h1>
       <div className='inputContainer'>
         <input type="text" placeholder="Contract Address" onChange={(e) => setContractAddress(e.target.value)} />
         <input type="text" placeholder="Token ID" onChange={(e) => setTokenId(e.target.value)} />
         <button onClick={fetchData}>View Ownership History</button>
       </div>
-      <NFTDisplay nft={nft} />
-      <NFTTable transfers={transfers} />
+      {loading ? (
+        <div>Loading...</div> // Display a loading message while data is being fetched
+      ) : (
+        <>
+          <NFTDisplay nft={nft} />
+          <NFTTable transfers={transfers} />
+        </>
+      )}
     </div>
   );
 };
