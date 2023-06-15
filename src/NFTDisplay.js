@@ -71,6 +71,7 @@ const Wrapper = () => {
   return (
     <div>
       <h1 className='title'>NFT Ownership History</h1>
+      <p>Input NFT token ID and contract address below to see recent transaction price.</p>
       <div className='inputContainer'>
         <input type="text" placeholder="Contract Address" onChange={(e) => setContractAddress(e.target.value)} />
         <input type="text" placeholder="Token ID" onChange={(e) => setTokenId(e.target.value)} />
