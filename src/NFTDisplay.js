@@ -8,8 +8,8 @@ const NFTDisplay = ({ nft }) => {
   }
 
   if (!nft) {
-    return <div className='message'>
-      Error: Make sure chain, contract address and token id are all valid.
+    return <div className='errorMessage'>
+      Error: Verify that chain, contract address and token id are all valid!
     </div>
   }
 
@@ -89,7 +89,7 @@ const Wrapper = () => {
   return (
     <div>
       <h1 className='title'>NFT Ownership History</h1>
-      <p className='message'>Select a chain and input NFT token ID and contract address below to see the ownership history of the NFT.</p>
+      <p className='message'>Select a chain and input contract address and NFT token ID below to see the ownership history of the NFT.</p>
       <div className='inputContainer'>
         <select name='blockchain' value={blockchain} onChange={handleBlockchainChange}>
           <option value="eth-main">eth-main</option>

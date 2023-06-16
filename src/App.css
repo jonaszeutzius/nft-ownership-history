@@ -12,6 +12,12 @@
   text-align: center;
 }
 
+.errorMessage {
+  text-align: center;
+  color: red;
+  font-weight: bold;
+}
+
 .message {
   text-align: center;
 }
