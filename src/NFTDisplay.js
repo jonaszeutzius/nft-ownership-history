@@ -3,9 +3,13 @@ import { getSingleNFT } from './api';
 import { getAllTransfers } from './api';
 
 const NFTDisplay = ({ nft }) => {
+  if (nft === null) {
+    return null
+  }
+
   if (!nft) {
     return <div className='message'>
-      Error: Make sure chain, contract address and token id are all correct.
+      Error: Make sure chain, contract address and token id are all valid.
     </div>
   }
 
