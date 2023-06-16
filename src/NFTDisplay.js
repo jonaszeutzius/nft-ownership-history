@@ -3,26 +3,29 @@ import { getSingleNFT } from './api';
 import { getAllTransfers } from './api';
 
 const NFTDisplay = ({ nft }) => {
-  if (nft === null) return null;
+  if (!nft) {
+    return <div className='message'>
+      Error: Make sure chain, contract address and token id are all correct.
+    </div>
+  }
 
   return (
     <div className="nftData">
       <h2>{nft.name}</h2>
       <div className="imageContainer">
-        {console.log(nft)}
-        <img className="image" src={nft.cached_images.medium_500_500} alt={nft.name} />
+        <img className="image" src={nft.cached_images?.medium_500_500} alt={nft.name} />
       </div>
-      {console.log(nft)}
       <p className='message'>
         Id: {nft.id} | 
         Token Name: {nft.token_name} | 
-        {(nft.rarity_rank)? `Rarity: ${nft.rarity_rank} | ` : " "}
-        Recent Price: ${parseFloat(nft.recent_price.price_usd).toFixed(2)} {`(${nft.recent_price.price} ${nft.recent_price.price_currency})`}</p>
+        {(nft.rarity_rank) ? `Rarity: ${nft.rarity_rank} | ` : " "}
+        Recent Price: ${parseFloat(nft.recent_price?.price_usd).toFixed(2)} {`(${nft.recent_price?.price} ${nft.recent_price?.price_currency})`}</p>
     </div>
   );
 };
+
 const NFTTable = ({ transfers }) => {
-  if (transfers === null) return null;
+  if (!transfers) return null;
 
   return (
     <table style={{ width: '100%', marginTop: '20px' }}>
@@ -49,6 +52,7 @@ const NFTTable = ({ transfers }) => {
     </table>
   );
 };
+
 
 const Wrapper = () => {
   const [contractAddress, setContractAddress] = useState('');
@@ -81,10 +85,8 @@ const Wrapper = () => {
   return (
     <div>
       <h1 className='title'>NFT Ownership History</h1>
-      <p className='message'>Input NFT token ID and contract address below to see the ownership history of the NFT.</p>
+      <p className='message'>Select a chain and input NFT token ID and contract address below to see the ownership history of the NFT.</p>
       <div className='inputContainer'>
-        <input type="text" placeholder="Contract Address" onChange={(e) => setContractAddress(e.target.value)} />
-        <input type="text" placeholder="Token ID" onChange={(e) => setTokenId(e.target.value)} />
         <select name='blockchain' value={blockchain} onChange={handleBlockchainChange}>
           <option value="eth-main">eth-main</option>
           <option value="arbitrum-main">arbitrum-main</option>
@@ -92,18 +94,21 @@ const Wrapper = () => {
           <option value="poly-main">poly-main</option>
           <option value="bsc-main">bsc-main</option>
           <option value="eth-goerli">eth-goerli</option>
-          {console.log('This is the blockchain:' + blockchain)}
         </select>
+        <input type="text" placeholder="Contract Address" onChange={(e) => setContractAddress(e.target.value)} />
+        <input type="text" placeholder="Token ID" onChange={(e) => setTokenId(e.target.value)} />
         <button onClick={fetchData}>View Ownership History</button>
       </div>
-      {loading ? (
-        <div>Loading...</div> // Display a loading message while data is being fetched
-      ) : (
-        <>
-          <NFTDisplay nft={nft} />
-          <NFTTable transfers={transfers} />
-        </>
-      )}
+      <>
+        {loading ? (
+          <div>Loading...</div>
+        ) : (
+          <>
+            <NFTDisplay nft={nft} />
+            <NFTTable transfers={transfers} />
+          </>
+        )}
+      </>
     </div>
   );
 };
