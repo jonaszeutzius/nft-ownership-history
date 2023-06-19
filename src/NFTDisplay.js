@@ -31,6 +31,11 @@ const NFTDisplay = ({ nft }) => {
 const NFTTable = ({ transfers }) => {
   if (!transfers) return null;
 
+  const checkData = (data) => {
+    const output = data ? data : 'N/A'
+    return output
+  }
+
   return (
     <table style={{ width: '100%', marginTop: '20px' }}>
       <thead>
@@ -45,11 +50,11 @@ const NFTTable = ({ transfers }) => {
       <tbody>
         {transfers.map((transfer, index) => (
           <tr key={index} style={{ backgroundColor: index % 2 === 0 ? '#f2f2f2' : 'white' }}>
-            <td style={{ padding: '10px' }}>{transfer.from_address}</td>
-            <td style={{ padding: '10px' }}>{transfer.to_address}</td>
-            <td style={{ padding: '10px' }}>{transfer.transfer_type}</td>
-            <td style={{ padding: '10px' }}>{transfer.block_timestamp}</td>
-            <td style={{ padding: '10px' }}>{transfer.quantity}</td>
+            <td style={{ padding: '10px' }}>{checkData(transfer.from_address)}</td>
+            <td style={{ padding: '10px' }}>{checkData(transfer.to_address)}</td>
+            <td style={{ padding: '10px' }}>{checkData(transfer.transfer_type)}</td>
+            <td style={{ padding: '10px' }}>{checkData(transfer.block_timestamp)}</td>
+            <td style={{ padding: '10px' }}>{checkData(transfer.quantity)}</td>
           </tr>
         ))}
       </tbody>
