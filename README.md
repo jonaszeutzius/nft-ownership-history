@@ -355,7 +355,7 @@ That's it! You've built an NFT ownership history tracker using Blockspan API and
 
 ## CONCLUSION AND NEXT STEPS
 
-In this tutorial, we've built an NFT ownership history tracker using Blockspan API and ReactJS. We've used the "get single NFT' and 'get all transfers of NFT' API endpoints provided by Blockspan to fetch detailed information about an NFT and its transfer history.
+In this tutorial, we've built an NFT ownership history tracker using Blockspan API and ReactJS. We've used the "get single NFT" and "get all transfers of NFT" API endpoints provided by Blockspan to fetch detailed information about an NFT and its transfer history.
 
 Although this is a simple example, it demonstrates how powerful Blockspan API can be when building applications related to blockchain and NFTs. You could extend this application to include more features, such as searching for NFTs by different parameters, displaying additional NFT details, or creating a more interactive UI for browsing transfer history.
 
