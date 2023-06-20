@@ -2,6 +2,11 @@ import React, { useState } from 'react';
 import { getSingleNFT } from './api';
 import { getAllTransfers } from './api';
 
+const checkData = (data) => {
+  const output = data ? data : 'N/A'
+  return output
+}
+
 const NFTDisplay = ({ nft }) => {
   if (nft === null) {
     return null
@@ -17,13 +22,26 @@ const NFTDisplay = ({ nft }) => {
     <div className="nftData">
       <h2>{nft.name}</h2>
       <div className="imageContainer">
-        <img className="image" src={nft.cached_images?.medium_500_500} alt={nft.name} />
+        {nft.cached_images && nft.cached_images.medium_500_500 ? (
+          <img 
+            className="image" 
+            src={nft.cached_images.medium_500_500} 
+            alt={nft.name}/>
+        ) : (
+          <div className='message'>
+            Image not available.
+          </div>
+        )}
       </div>
-      <p className='message'>
-        Id: {nft.id} | 
-        Token Name: {nft.token_name} | 
-        {(nft.rarity_rank) ? `Rarity: ${nft.rarity_rank} | ` : " "}
-        Recent Price: ${parseFloat(nft.recent_price?.price_usd).toFixed(2)} {`(${nft.recent_price?.price} ${nft.recent_price?.price_currency})`}</p>
+      <p className="message">
+            Id: {checkData(nft.id)} | 
+            Token Name: {checkData(nft.token_name)} | 
+            Rarity: {checkData(nft.rarity_rank)} | 
+            Recent Price USD: {nft.recent_price && nft.recent_price.price_usd ? parseFloat(nft.recent_price.price_usd).toFixed(2) : 'N/A'} |   
+            Recent Price Native Currency: {nft.recent_price && nft.recent_price.price ? 
+              `${parseFloat(nft.recent_price.price).toFixed(5)} ${nft.recent_price.price_currency}` : 
+              'N/A'}
+          </p>
     </div>
   );
 };
@@ -31,34 +49,31 @@ const NFTDisplay = ({ nft }) => {
 const NFTTable = ({ transfers }) => {
   if (!transfers) return null;
 
-  const checkData = (data) => {
-    const output = data ? data : 'N/A'
-    return output
-  }
-
   return (
-    <table style={{ width: '100%', marginTop: '20px' }}>
-      <thead>
-        <tr style={{ backgroundColor: '#f2f2f2' }}>
-          <th style={{ padding: '10px', textAlign: 'left' }}>From</th>
-          <th style={{ padding: '10px', textAlign: 'left' }}>To</th>
-          <th style={{ padding: '10px', textAlign: 'left' }}>Transfer Type</th>
-          <th style={{ padding: '10px', textAlign: 'left' }}>Block Timestamp</th>
-          <th style={{ padding: '10px', textAlign: 'left' }}>Quantity</th>
-        </tr>
-      </thead>
-      <tbody>
-        {transfers.map((transfer, index) => (
-          <tr key={index} style={{ backgroundColor: index % 2 === 0 ? '#f2f2f2' : 'white' }}>
-            <td style={{ padding: '10px' }}>{checkData(transfer.from_address)}</td>
-            <td style={{ padding: '10px' }}>{checkData(transfer.to_address)}</td>
-            <td style={{ padding: '10px' }}>{checkData(transfer.transfer_type)}</td>
-            <td style={{ padding: '10px' }}>{checkData(transfer.block_timestamp)}</td>
-            <td style={{ padding: '10px' }}>{checkData(transfer.quantity)}</td>
+    <div className='tableContainer'>
+      <table>
+        <thead>
+          <tr style={{ backgroundColor: '#f2f2f2' }}>
+            <th>From</th>
+            <th>To</th>
+            <th>Transfer Type</th>
+            <th>Block Timestamp</th>
+            <th>Quantity</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {transfers.map((transfer, index) => (
+            <tr key={index} style={{ backgroundColor: index % 2 === 0 ? '#f2f2f2' : 'white' }}>
+              <td>{checkData(transfer.from_address)}</td>
+              <td>{checkData(transfer.to_address)}</td>
+              <td>{checkData(transfer.transfer_type)}</td>
+              <td>{checkData(transfer.block_timestamp)}</td>
+              <td>{checkData(transfer.quantity)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 };
 
