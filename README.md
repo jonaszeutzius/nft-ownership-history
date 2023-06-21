@@ -88,7 +88,7 @@ export const getSingleNFT = async (contractAddress, tokenId, blockchain) => {
 
 ```
 
-Don't forget to replace 'YOUR_BLOCKSPAN_API_KEY' with your actual Blockspan API key.
+Don't forget to replace `YOUR_BLOCKSPAN_API_KEY` with your actual Blockspan API key!
 
 
 ## STEP 4: CREATING THE NFT DISPLAY COMPONENT
