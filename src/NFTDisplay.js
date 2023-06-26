@@ -34,14 +34,14 @@ const NFTDisplay = ({ nft }) => {
         )}
       </div>
       <p className="message">
-            Id: {checkData(nft.id)} | 
-            Token Name: {checkData(nft.token_name)} | 
-            Rarity: {checkData(nft.rarity_rank)} | 
-            Recent Price USD: {nft.recent_price && nft.recent_price.price_usd ? parseFloat(nft.recent_price.price_usd).toFixed(2) : 'N/A'} |   
-            Recent Price Native Currency: {nft.recent_price && nft.recent_price.price ? 
-              `${parseFloat(nft.recent_price.price).toFixed(5)} ${nft.recent_price.price_currency}` : 
-              'N/A'}
-          </p>
+        Id: {checkData(nft.id)} | 
+        Token Name: {checkData(nft.token_name)} | 
+        Rarity: {checkData(nft.rarity_rank)} | 
+        Recent Price USD: {nft.recent_price && nft.recent_price.price_usd ? parseFloat(nft.recent_price.price_usd).toFixed(2) : 'N/A'} |   
+        Recent Price Native Currency: {nft.recent_price && nft.recent_price.price ? 
+          `${parseFloat(nft.recent_price.price).toFixed(5)} ${nft.recent_price.price_currency}` : 
+          'N/A'}
+      </p>
     </div>
   );
 };

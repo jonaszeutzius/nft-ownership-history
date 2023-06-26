@@ -13,9 +13,9 @@ Ownership tracking in the NFT ecosystem provides a clear picture of an asset's p
 
 Before we begin, ensure you have the following:
 
-Node.js and npm installed (npm comes with Node.js, you can download it from here)
-A basic understanding of ReactJS and JavaScript
-A Blockspan API key (Get it here)
+- Node.js and npm installed
+- A basic understanding of ReactJS and JavaScript
+- A Blockspan API key
 
 
 ## STEP 1: SETTING UP THE REACT APP
@@ -53,7 +53,7 @@ const API_KEY = 'YOUR_BLOCKSPAN_API_KEY';
 export const getAllTransfers = async (contractAddress, tokenId, blockchain) => {
   const options = {
     method: 'GET',
-    url: `http://localhost:8080/v1/transfers/contract/${contractAddress}/token/${tokenId}?chain=${blockchain}&page_size=25`,
+    url: `https://api.blockspan.api/v1/transfers/contract/${contractAddress}/token/${tokenId}?chain=${blockchain}&page_size=25`,
     headers: {
       accept: 'application/json',
       'X-API-KEY': API_KEY
@@ -71,7 +71,7 @@ export const getAllTransfers = async (contractAddress, tokenId, blockchain) => {
 export const getSingleNFT = async (contractAddress, tokenId, blockchain) => {
   const options = {
     method: 'GET',
-    url: `http://localhost:8080/v1/nfts/contract/${contractAddress}/token/${tokenId}?chain=${blockchain}`,
+    url: `https://api.blockspan.api/v1/nfts/contract/${contractAddress}/token/${tokenId}?chain=${blockchain}`,
     headers: {
       accept: 'application/json',
       'X-API-KEY': API_KEY
